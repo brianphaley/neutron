@@ -301,7 +301,7 @@ class TaggingControllerDbTestCase(testlib_api.WebTestCase):
 
             get_res.assert_called_once_with(self.ctx, mock.ANY, tags=tags)
             policy_enforce.assert_called_once_with(
-                self.ctx, mock.ANY, obj_mock)
+                self.ctx, 'create_network:tags', obj_mock)
             self.tc.plugin.create_tags.assert_called_once_with(
                 self.ctx, mock.ANY, mock.ANY, body)
             notify.assert_has_calls([
@@ -328,7 +328,7 @@ class TaggingControllerDbTestCase(testlib_api.WebTestCase):
 
             get_res.assert_called_once_with(self.ctx, mock.ANY, tags=tags)
             policy_enforce.assert_called_once_with(
-                self.ctx, mock.ANY, obj_mock)
+                self.ctx, 'create_network:tags', obj_mock)
             self.tc.plugin.create_tags.assert_not_called()
             notify.assert_not_called()
 
@@ -353,7 +353,7 @@ class TaggingControllerDbTestCase(testlib_api.WebTestCase):
 
             get_res.assert_called_once_with(self.ctx, kwargs, tags=[new_tag])
             policy_enforce.assert_called_once_with(
-                self.ctx, mock.ANY, obj_mock)
+                self.ctx, 'update_network:tags', obj_mock)
             self.tc.plugin.get_tags.assert_called_once_with(
                 self.ctx, mock.ANY, mock.ANY)
             self.tc.plugin.update_tag.assert_called_once_with(
@@ -388,7 +388,7 @@ class TaggingControllerDbTestCase(testlib_api.WebTestCase):
 
             get_res.assert_called_once_with(self.ctx, kwargs, tags=[new_tag])
             policy_enforce.assert_called_once_with(
-                self.ctx, mock.ANY, obj_mock)
+                self.ctx, 'update_network:tags', obj_mock)
             self.tc.plugin.get_tags.assert_called_once_with(
                 self.ctx, mock.ANY, mock.ANY)
             self.tc.plugin.update_tag.assert_called_once_with(
@@ -421,7 +421,7 @@ class TaggingControllerDbTestCase(testlib_api.WebTestCase):
 
             get_res.assert_called_once_with(self.ctx, kwargs, tags=[new_tag])
             policy_enforce.assert_called_once_with(
-                self.ctx, mock.ANY, obj_mock)
+                self.ctx, 'update_network:tags', obj_mock)
             self.tc.plugin.get_tags.assert_called_once_with(
                 self.ctx, mock.ANY, mock.ANY)
             self.tc.plugin.update_tag.assert_not_called()

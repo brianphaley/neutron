@@ -227,8 +227,10 @@ class TaggingController:
         validate_tags(body)
         ctx = request.context
         rinfo = self._get_resource_info(ctx, kwargs, tags=body[TAGS])
-        policy.enforce(ctx, f'create_{rinfo.obj_type}:{TAGS}',
-                       rinfo.obj)
+        policy.enforce(
+            ctx,
+            self._get_policy_action("create", rinfo.obj_type),
+            rinfo.obj)
         validate_tags_limit(rinfo.obj_type, body['tags'])
         notify_tag_action(ctx, 'create.start', rinfo.obj_type,
                           rinfo.obj['id'], body['tags'])
@@ -244,8 +246,10 @@ class TaggingController:
         validate_tag(id)
         ctx = request.context
         rinfo = self._get_resource_info(ctx, kwargs, tags=[id])
-        policy.enforce(ctx, f'update_{rinfo.obj_type}:{TAGS}',
-                       rinfo.obj)
+        policy.enforce(
+            ctx,
+            self._get_policy_action("update", rinfo.obj_type),
+            rinfo.obj)
         current_tags = self.plugin.get_tags(
             ctx, rinfo.obj_type, rinfo.obj['id'])['tags']
         new_tags = current_tags + [id]
